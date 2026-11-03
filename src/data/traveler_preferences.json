@@ -1,0 +1,97 @@
+{
+  "lastUpdated": "2026-09-25T15:56:00Z",
+  "travelGroup": {
+    "familyGroupName": "Zainul Family",
+    "primaryContactPhone": "+52 81 1234 5678",
+    "primaryEmail": "ahmed.zainul@example.com"
+  },
+  "travelers": [
+    {
+      "id": "trav_001",
+      "isPrimary": true,
+      "fullName": "Ahmed Zainul",
+      "preferredName": "Ahmed",
+      "relationship": "Self (Primary Traveler)",
+      "type": "Adult",
+      "dateOfBirth": "1988-06-14",
+      "homeAirports": ["MTY (Monterrey, Mexico)", "DFW (Dallas, USA)"],
+      "frequentDestinations": ["Madrid, Spain", "Salamanca, Spain", "New York, USA"],
+      "seatPreference": "Window, Extra Legroom (Comfort / Exit Row)",
+      "cabinPreference": "Business / Premium Economy",
+      "mealPreference": "Halal / Muslim Meal (MOML)",
+      "preferredAirlines": ["Iberia", "Aeroméxico", "Delta Air Lines", "Qatar Airways"],
+      "loyaltyPrograms": [
+        { "airline": "Iberia Plus", "memberNumber": "IB-9482019", "tier": "Gold / Oro" },
+        { "airline": "Aeroméxico Club Premier", "memberNumber": "CP-4481029", "tier": "Titanium" },
+        { "airline": "Delta SkyMiles", "memberNumber": "DL-7730192", "tier": "Platinum" }
+      ],
+      "passportEncrypted": {
+        "nationality": "Mexican / International",
+        "maskedNumber": "••••••••9842",
+        "expiryDate": "2031-11-15"
+      }
+    },
+    {
+      "id": "trav_002",
+      "isPrimary": false,
+      "fullName": "Fatima Zainul",
+      "preferredName": "Fatima",
+      "relationship": "Spouse",
+      "type": "Adult",
+      "dateOfBirth": "1991-09-22",
+      "seatPreference": "Window or Aisle (Seated directly adjacent to Ahmed)",
+      "cabinPreference": "Same as Ahmed (Business / Premium Economy)",
+      "mealPreference": "Halal Vegetarian (AVML / MOML)",
+      "loyaltyPrograms": [
+        { "airline": "Iberia Plus", "memberNumber": "IB-9482020", "tier": "Silver / Plata" }
+      ],
+      "passportEncrypted": {
+        "nationality": "Mexican / International",
+        "maskedNumber": "••••••••4118",
+        "expiryDate": "2032-04-10"
+      }
+    },
+    {
+      "id": "trav_003",
+      "isPrimary": false,
+      "fullName": "Zayd Zainul",
+      "preferredName": "Zayd",
+      "relationship": "Child (Son, Age 8)",
+      "type": "Child",
+      "dateOfBirth": "2018-03-15",
+      "seatPreference": "Middle seat directly between Ahmed and Fatima",
+      "cabinPreference": "Same as Parents",
+      "mealPreference": "Child Halal Meal (CHML)",
+      "specialAssistance": "Requires child entertainment kit / headphones",
+      "loyaltyPrograms": [
+        { "airline": "Iberia Plus Kids", "memberNumber": "IB-9482021", "tier": "Clásica" }
+      ],
+      "passportEncrypted": {
+        "nationality": "Mexican / International",
+        "maskedNumber": "••••••••7203",
+        "expiryDate": "2029-08-20"
+      }
+    }
+  ],
+  "hotelPreferences": {
+    "starRating": "4 to 5 Star Luxury / Boutique",
+    "preferredChains": ["Marriott Bonvoy", "Meliá Hotels & Resorts", "Bless Collection", "Hilton"],
+    "roomTypeSolo": "1 King Bed, Quiet High Floor away from elevator",
+    "roomTypeFamily": "Family Suite OR 2 Connecting / Interconnecting Rooms",
+    "amenitiesRequired": [
+      "High-speed WiFi",
+      "Gourmet Breakfast Included (Halal/Vegetarian options)",
+      "Family Friendly / Crib or Extra Bed available",
+      "Central Historic Location (Salamanca / Centro)"
+    ]
+  },
+  "generalTravelRules": {
+    "maxStops": 1,
+    "maxLayoverHours": 3.5,
+    "avoidRedEyeFlights": true,
+    "preferredDepartureTime": "Morning (08:00 - 12:00)",
+    "alwaysPresentTopOptions": 3,
+    "requireExplicitApprovalBeforeBooking": true,
+    "neverStoreRawCreditCards": true
+  }
+}

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura — Executive Travel Concierge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="logo-text">Aura Travel Concierge</h1>
+        <p class="logo-sub">Zainul Family Office • Executive Travel Assistant</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <span class="status-indicator">
+        <span class="status-dot"></span>
+        Concierge Active
+      </span>
+      <div class="lang-selector-group" id="langSelectorGroup">
+        <span class="lang-selector-label">Language:</span>
+        <button class="lang-btn active" data-lang="auto" title="Automatically detect language from message">🌐 Auto</button>
+        <button class="lang-btn" data-lang="en" title="Force English response">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="es" title="Force Spanish response">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main class="app-body">
+    <!-- Left Column: Authentic WhatsApp Chat Simulator -->
+    <section class="chat-container">
+      <!-- WhatsApp Window Header -->
+      <div class="chat-header">
+        <div class="avatar-group">
+          <div class="avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <h2 class="chat-title">Aura Concierge (WhatsApp)</h2>
+            <p class="chat-sub">Direct Assistant Channel • Connected</p>
+          </div>
+        </div>
+
+        <button id="resetChatBtn" class="clean-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>
+          </svg>
+          Clear Chat
+        </button>
+      </div>
+
+      <!-- Quick Test Prompt Bar -->
+      <div class="prompt-bar">
+        <span class="prompt-bar-label">Quick Prompts:</span>
+        <div class="prompt-chips-wrapper">
+          <button class="chip" data-text="Find me flights from Monterrey to Madrid next Thursday and a hotel near Salamanca for my whole family (me, wife, and child).">
+            👨‍👩‍👦 Family Trip to Madrid (EN)
+          </button>
+          <button class="chip" data-text="Búscame vuelos de Monterrey a Madrid para el próximo jueves y un buen hotel para toda mi familia (mi esposa, mi hijo y yo).">
+            🇪🇸 Viaje Familiar a Madrid (ES)
+          </button>
+          <button class="chip" data-text="I want to book Option 1 for my family (Iberia + Hotel Wellington). Please prepare the formal approval.">
+            💳 Request Booking Approval (Phase 4)
+          </button>
+          <button class="chip" data-text="I explicitly APPROVE order TRV-984201. Please execute the tokenized payment with my Elevate card.">
+            ✅ Authorize & Book Trip (Phase 4)
+          </button>
+          <button class="chip" data-text="Check my Google Calendars for next Thursday to see if I have any schedule conflicts traveling to Madrid.">
+            📅 Check Calendar Conflicts (Phase 3)
+          </button>
+          <button class="chip" data-text="Scan my 3 Gmail accounts for flight and hotel booking confirmations.">
+            📧 Scan 3 Gmail Accounts (Phase 3)
+          </button>
+          <button class="chip" data-text="Show me my active transactions and payment receipts.">
+            📋 View Transaction Receipts
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Messages Scroll Area -->
+      <div class="chat-box" id="chatMessages">
+        <div class="bubble assistant">
+          <div class="bubble-sender">Aura Travel Concierge</div>
+          <div class="bubble-text">
+            Hello Ahmed! I am your personal <strong>AI Travel Concierge</strong>.
+            <br><br>
+            I have your family travel preferences on file for <strong>Ahmed</strong>, <strong>Fatima</strong>, and <strong>Zayd</strong> (Iberia Gold, Aeroméxico Titanium, window extra-legroom seats, and 4-5 star central hotels).
+            <br><br>
+            <strong>Phase 4 Security & Transactions Active:</strong> Explicit booking approval workflow enabled with <strong>Elevate & Revolut tokenized payment vaults</strong>. Zero raw card storage.
+            <br><br>
+            How can I assist your travels today? You can type in <strong>English</strong> or <strong>Español</strong>.
+          </div>
+          <div class="bubble-meta">
+            <span class="bubble-time">Just now</span>
+            <span class="check-marks">✓✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div style="display:flex; gap:6px; overflow-x:auto; padding:6px 12px; background:#F8FAFC; border-top:1px solid #E2E8F0;">
+        <button class="chip" data-text="Find flights and hotel in Madrid for my whole family" style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:14px; padding:4px 10px; font-size:0.68rem; color:#0F172A; cursor:pointer; white-space:nowrap;">✈️ Family Trip to Madrid</button>
+        <button class="chip" data-text="Generate an Excel lead sheet for office buildings under construction in Mexico with developer, location, status and contacts" style="background:#EFF6FF; border:1px solid #93C5FD; border-radius:14px; padding:4px 10px; font-size:0.68rem; color:#1D4ED8; font-weight:600; cursor:pointer; white-space:nowrap;">📊 Mexico Office Construction Leads (Excel)</button>
+        <button class="chip" data-text="Show me my monthly expense breakdown and budget anomalies" style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:14px; padding:4px 10px; font-size:0.68rem; color:#0F172A; cursor:pointer; white-space:nowrap;">💳 Expense Breakdown</button>
+      </div>
+
+      <!-- Chat Input Field -->
+      <div class="chat-footer">
+        <input 
+          type="text" 
+          id="messageInput" 
+          placeholder="Ask in English or Español (e.g., 'Find flights for my family to Madrid...')" 
+          autocomplete="off"
+        />
+        <button id="sendBtn" class="send-action-btn" aria-label="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Right Column: Family Profiles, Duffel Engine, Gmail, Calendars, Approvals -->
+    <section class="profile-container">
+      <div class="panel-tabs">
+        <button class="panel-tab-btn active" data-tab="duffelTab">✈️ Duffel Travel</button>
+        <button class="panel-tab-btn" data-tab="transactionTab">💳 Booking & Approval (Phase 4)</button>
+        <button class="panel-tab-btn" data-tab="financeTab">&#128200; Finance (Phase 6)</button>
+        <button class="panel-tab-btn" data-tab="vendorTab">&#129309; Vendors &amp; Quotes (Phase 7)</button>
+        <button class="panel-tab-btn" data-tab="driveTab">&#128193; Drive &amp; Invoices (Phase 5)</button>
+        <button class="panel-tab-btn" data-tab="gmailTab">📧 3 Gmail Accounts</button>
+        <button class="panel-tab-btn" data-tab="calendarTab">📅 Google Calendar</button>
+        <button class="panel-tab-btn" data-tab="profilesTab">👨‍👩‍👦 Family Profiles (3)</button>
+        <button class="panel-tab-btn" data-tab="policyTab">🛡️ Safety Rules</button>
+      </div>
+
+      <!-- Tab 1: Duffel Search Engine (Phase 2 Deliverable) -->
+      <div class="tab-pane active" id="duffelTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">Duffel Travel Engine</h3>
+            <p class="pane-sub">Live Flights & Hotels • USA / Mexico / Europe</p>
+          </div>
+          <span class="badge-pill" style="background:#F0FDF4; color:#166534; border-color:#BBF7D0;">Duffel v2 Active</span>
+        </div>
+
+        <!-- Quick Search Form -->
+        <div class="search-form-card">
+          <div class="search-row">
+            <div class="search-input-group">
+              <label>Origin</label>
+              <input type="text" id="flightOrigin" value="MTY (Monterrey)" readonly />
+            </div>
+            <div class="search-arrow">➔</div>
+            <div class="search-input-group">
+              <label>Destination</label>
+              <input type="text" id="flightDest" value="MAD (Madrid)" readonly />
+            </div>
+            <div class="search-input-group">
+              <label>Travel Party</label>
+              <select id="flightParty">
+                <option value="family">👨‍👩‍👦 Zainul Family (3 Passengers)</option>
+                <option value="solo">👤 Ahmed Zainul (Solo)</option>
+              </select>
+            </div>
+          </div>
+          <button id="runDuffelSearchBtn" class="duffel-search-btn">
+            <span>Query Duffel Flights & Hotels (Top 3)</span>
+          </button>
+        </div>
+
+        <!-- Top 3 Results Preview Container -->
+        <div class="duffel-results" id="duffelResults">
+          <div class="loading-state">Click above to query Duffel Live Search or ask in WhatsApp chat.</div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Transactions & Booking Approval (Phase 4 Deliverable) -->
+      <div class="tab-pane" id="transactionTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">Booking Approval & Payments</h3>
+            <p class="pane-sub">Explicit Consent Required • Zero Raw Card Storage</p>
+          </div>
+          <span class="badge-pill" style="background:#FFF7ED; color:#C2410C; border-color:#FED7AA;">Phase 4 Active</span>
+        </div>
+
+        <!-- Pending Approval Banner -->
+        <div id="pendingApprovalBanner" style="display:none; background:linear-gradient(135deg,#FFF7ED,#FFFBEB); border:1.5px solid #FED7AA; border-radius:12px; padding:14px 16px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+            <div>
+              <div style="font-size:0.78rem; font-weight:700; color:#92400E; text-transform:uppercase; letter-spacing:0.04em;">⏳ Awaiting Your Explicit Approval</div>
+              <div id="pendingTxId" style="font-size:0.72rem; color:#B45309; margin-top:2px;"></div>
+            </div>
+            <span style="font-size:1.4rem;">✈️</span>
+          </div>
+          <div id="pendingTxSummary" style="font-size:0.78rem; color:#78350F; line-height:1.7; margin-bottom:12px;"></div>
+          <div style="display:flex; gap:8px;">
+            <button id="approveTxBtn" class="duffel-search-btn" style="flex:1; margin-top:0; padding:9px; font-size:0.78rem; background:linear-gradient(135deg,#16A34A,#15803D);">
+              ✅ I Explicitly APPROVE & Authorize Payment
+            </button>
+            <button id="declineTxBtn" class="clean-btn" style="flex:0.4; justify-content:center; padding:9px; font-size:0.78rem; border-color:#FCA5A5; color:#DC2626;">
+              ✗ Decline
+            </button>
+          </div>
+        </div>
+
+        <!-- Payment Vaults on File -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">🔐 Tokenized Payment Vaults on File</div>
+        <div id="paymentVaultsList" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
+
+        <!-- Transaction History -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">📋 Booking Records & Receipts</div>
+        <div id="transactionHistoryList" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+
+      <!-- Tab 3: 3 Gmail Accounts (Phase 3 Deliverable) -->
+      <div class="tab-pane" id="gmailTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">3 Connected Gmail Inboxes</h3>
+            <p class="pane-sub">Confirmation Reader • PNR & E-Ticket Parser</p>
+          </div>
+          <span class="badge-pill" style="background:#EFF6FF; color:#1E40AF; border-color:#BFDBFE;">OAuth 2.0 Ready</span>
+        </div>
+
+        <div class="account-selector-row" id="accountSelectorRow">
+          <!-- Populated dynamically: 3 Accounts -->
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <button id="scanInboxesBtn" class="clean-btn" style="flex: 1; justify-content: center; padding: 8px 12px; font-weight: 600;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Audit & Scan 3 Inboxes for Travel
+          </button>
+        </div>
+
+        <div class="gmail-inbox-list" id="gmailInboxList">
+          <!-- Dynamically populated emails -->
+        </div>
+      </div>
+
+      <!-- Tab 3: Google Calendars & Conflicts (Phase 3 Deliverable) -->
+      <div class="tab-pane" id="calendarTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">Google Calendars & Scheduling</h3>
+            <p class="pane-sub">Multi-Calendar Sync • Automated Conflict Detection</p>
+          </div>
+          <span class="badge-pill" style="background:#FDF2F8; color:#9D174D; border-color:#FBCFE8;">3 Calendars Linked</span>
+        </div>
+
+        <!-- Conflict Detector Card -->
+        <div class="conflict-checker-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.78rem; font-weight:700; color:#0F172A; text-transform:uppercase;">🛡️ Trip Conflict Analysis</span>
+            <span class="badge-pill" id="conflictStatusBadge" style="background:#ECFDF5; color:#065F46;">Schedule Clear</span>
+          </div>
+          <p style="font-size:0.75rem; color:#475569; margin-bottom:10px;" id="conflictStatusText">
+            Madrid Trip (Oct 8 – 13, 2026): Executive Board meeting coincides on Oct 10 in Madrid (Aligned).
+          </p>
+          <div style="display:flex; gap:8px;">
+            <button id="runConflictCheckBtn" class="clean-btn" style="flex:1; justify-content:center; padding:7px; font-size:0.75rem;">
+              Re-Scan Calendar Conflicts
+            </button>
+            <button id="syncItineraryBtn" class="duffel-search-btn" style="flex:1; margin-top:0; padding:7px; font-size:0.75rem;">
+              Sync Flight & Hotel to Calendar
+            </button>
+          </div>
+        </div>
+
+        <!-- Calendar Events Agenda View -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin:14px 0 8px 0;">
+          📅 Upcoming Agenda & Travel Blocks
+        </div>
+        <div class="calendar-events-list" id="calendarEventsList">
+          <!-- Dynamically populated calendar events -->
+        </div>
+      </div>
+
+      <!-- Tab 4: Family Profiles -->
+      <div class="tab-pane" id="profilesTab">
+        <div class="profile-header">
+          <div class="profile-title-wrap">
+            <h3 class="pane-title">Family Travel Profiles</h3>
+            <p class="pane-sub">3 Authorized Travelers Linked</p>
+          </div>
+          <span class="badge-pill">Verified Office</span>
+        </div>
+        <div class="profile-scroll" id="travelerList">
+          <!-- Dynamically Populated -->
+        </div>
+      </div>
+
+      <!-- Tab Phase 6: Financial Analysis & Expense Management -->
+      <div class="tab-pane" id="financeTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">Financial Analysis</h3>
+            <p class="pane-sub">Amex Expense Review • Anomaly Detection • Monthly Reports</p>
+          </div>
+          <span class="badge-pill" style="background:#F0FDF4; color:#166534; border-color:#BBF7D0;">Phase 6 Active</span>
+        </div>
+
+        <!-- Summary Bar -->
+        <div id="financeSummaryBar" style="background:linear-gradient(135deg,#0F172A,#1E293B); border-radius:12px; padding:14px 16px; margin-bottom:14px; color:#F8FAFC;">
+          <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; color:#94A3B8; margin-bottom:8px;">📊 Monthly Spending Overview</div>
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div><div id="finTotalSpent" style="font-size:1.3rem; font-weight:800; color:#FFFFFF;">$0</div><div style="font-size:0.65rem; color:#94A3B8;">Total Spent (USD)</div></div>
+            <div><div id="finBudgetUsed" style="font-size:1.3rem; font-weight:800; color:#FCD34D;">0%</div><div style="font-size:0.65rem; color:#94A3B8;">Budget Used</div></div>
+            <div><div id="finAnomalyCount" style="font-size:1.3rem; font-weight:800; color:#F87171;">0</div><div style="font-size:0.65rem; color:#94A3B8;">Anomalies</div></div>
+            <div><div id="finTxnCount" style="font-size:1.3rem; font-weight:800; color:#86EFAC;">0</div><div style="font-size:0.65rem; color:#94A3B8;">Transactions</div></div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+          <button id="finGenReportBtn" class="duffel-search-btn" style="flex:1; margin-top:0; padding:8px; font-size:0.75rem;">📋 Generate Monthly Report</button>
+          <button id="finExportBtn" class="clean-btn" style="flex:1; justify-content:center; padding:8px; font-size:0.75rem; font-weight:600;">📥 Export Spreadsheet</button>
+        </div>
+
+        <!-- Anomaly Alerts -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">🚨 Anomaly & Budget Alerts</div>
+        <div id="finAnomalyList" style="display:flex; flex-direction:column; gap:7px; margin-bottom:14px;"></div>
+
+        <!-- Category Breakdown -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">📂 Spending by Category</div>
+        <div id="finCategoryList" style="display:flex; flex-direction:column; gap:7px; margin-bottom:14px;"></div>
+
+        <!-- Recent Transactions -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">💳 Recent Transactions</div>
+        <div id="finTxnList" style="display:flex; flex-direction:column; gap:6px;"></div>
+      </div>
+
+
+      <!-- Tab Phase 7: Vendor Communication & Quote Collection -->
+      <div class="tab-pane" id="vendorTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">Vendor Communication &amp; RFPs</h3>
+            <p class="pane-sub">Automated Quote Requests &bull; Side-by-Side Comparison &bull; Proactive Follow-ups</p>
+          </div>
+          <span class="badge-pill" style="background:#F0FDF4; color:#166534; border-color:#BBF7D0;">Phase 7 Active</span>
+        </div>
+
+        <!-- Vendor Pipeline Summary -->
+        <div style="background:linear-gradient(135deg,#0F172A,#1E293B); border-radius:12px; padding:14px 16px; margin-bottom:14px; color:#F8FAFC;">
+          <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; color:#94A3B8; margin-bottom:8px;">🤝 Vendor Pipeline &amp; RFQ Stats</div>
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div><div id="venActiveRequests" style="font-size:1.3rem; font-weight:800; color:#FFFFFF;">0</div><div style="font-size:0.65rem; color:#94A3B8;">Active RFPs</div></div>
+            <div><div id="venQuotesReceived" style="font-size:1.3rem; font-weight:800; color:#86EFAC;">0</div><div style="font-size:0.65rem; color:#94A3B8;">Quotes Received</div></div>
+            <div><div id="venPendingReplies" style="font-size:1.3rem; font-weight:800; color:#FCD34D;">0</div><div style="font-size:0.65rem; color:#94A3B8;">Awaiting Reply</div></div>
+            <div><div id="venSavings" style="font-size:1.3rem; font-weight:800; color:#38BDF8;">$0</div><div style="font-size:0.65rem; color:#94A3B8;">Negotiated Savings</div></div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+          <button id="venNewRfpBtn" class="duffel-search-btn" style="flex:1; margin-top:0; padding:8px; font-size:0.75rem;">➕ Dispatch New RFP</button>
+          <button id="venRunFollowUpsBtn" class="clean-btn" style="flex:1; justify-content:center; padding:8px; font-size:0.75rem; font-weight:600;">⚡ Proactive Follow-up</button>
+        </div>
+
+        <!-- Active Quote Requests with Side-by-Side Comparisons -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">📋 Active RFPs &amp; Side-by-Side Quotes</div>
+        <div id="venRequestsList" style="display:flex; flex-direction:column; gap:12px; margin-bottom:14px;"></div>
+
+        <!-- Preferred Vendor Directory -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">📁 Verified Vendor Directory</div>
+        <div id="venDirectoryList" style="display:flex; flex-direction:column; gap:6px;"></div>
+      </div>
+      <!-- Tab Phase 5: Google Drive & Invoice Automation -->
+      <div class="tab-pane" id="driveTab">
+        <div class="duffel-header-bar">
+          <div>
+            <h3 class="pane-title">Google Drive & Invoices</h3>
+            <p class="pane-sub">Auto-Organize Files • Invoice Tracking • Monthly Reports</p>
+          </div>
+          <span class="badge-pill" style="background:#F0FDF4; color:#166534; border-color:#BBF7D0;">Phase 5 Active</span>
+        </div>
+
+        <!-- Folder Browser -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">📂 Drive Folder Structure</div>
+        <div id="driveFolderList" style="display:flex; flex-direction:column; gap:6px; margin-bottom:14px;"></div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+          <button id="driveShowAllFilesBtn" class="clean-btn" style="flex:1; justify-content:center; padding:8px; font-size:0.75rem; font-weight:600;">
+            📎 View All Files
+          </button>
+          <button id="driveGenReportBtn" class="duffel-search-btn" style="flex:1; margin-top:0; padding:8px; font-size:0.75rem;">
+            📊 Generate Monthly Summary
+          </button>
+        </div>
+
+        <!-- Invoice Requests Section -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;">🧧 Invoice Requests & Follow-ups</div>
+        <div id="invoiceRequestsList" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;"></div>
+
+        <!-- Files List Section -->
+        <div style="font-size:0.75rem; font-weight:700; color:#0F172A; text-transform:uppercase; margin-bottom:8px;" id="driveFilesHeader">📄 Drive Files</div>
+        <div id="driveFilesList" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+
+      <!-- Tab 5: Policy & Safety -->
+      <div class="tab-pane" id="policyTab">
+        <div class="policy-card" style="margin-top: 0;">
+          <div class="policy-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span style="font-size: 0.9rem;">Phase 1, 2, 3 & 4 Safety Protocol</span>
+          </div>
+          <p class="policy-text" style="font-size: 0.8rem; line-height: 1.8;">
+            • <strong>Duffel API Primary:</strong> Direct integration for USA, Mexico & Europe flights/hotels.<br>
+            • <strong>Top-3 Curation:</strong> Filters out hundreds of noisy results to present the 3 highest value options.<br>
+            • <strong>3 Gmail Accounts (OAuth 2.0):</strong> Least-privilege tokenized access for travel confirmations.<br>
+            • <strong>Conflict Detection:</strong> Automatic verification of executive calendar obligations prior to flight booking.<br>
+            • <strong>Zero Unauthorized Charges:</strong> Flight purchases and hotel commitments strictly require explicit consent.<br>
+            • <strong>Phase 4 Approval Workflow:</strong> State-machine enforced: DRAFT → PENDING_APPROVAL → APPROVED → PAID_AND_BOOKED.<br>
+            • <strong>Tokenized Vaults Only:</strong> Elevate Business Vault & Revolut Family Vault — zero raw 16-digit card numbers stored or transmitted.<br>
+            • <strong>Post-Booking Automation:</strong> Confirmed bookings auto-sync to Google Calendar and trigger Gmail confirmation drafts.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
