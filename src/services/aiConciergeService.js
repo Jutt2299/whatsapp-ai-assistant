@@ -29,24 +29,32 @@ class AIConciergeService {
     const history = this.getSessionHistory(sessionId);
     const memoryContext = preferenceService.getConciergeMemoryContext();
 
-    // Check if an external LLM (Gemini or OpenAI) is configured
-    const geminiKey = process.env.GEMINI_API_KEY;
+    // Check if an external LLM (OpenAI or Gemini) is configured
+    const aiProvider = (process.env.AI_PROVIDER || 'openai').toLowerCase();
     const openaiKey = process.env.OPENAI_API_KEY;
+    const geminiKey = process.env.GEMINI_API_KEY;
 
     let reply = '';
 
-    if (geminiKey && geminiKey.trim() !== '') {
+    if (aiProvider === 'openai' && openaiKey && openaiKey.trim() !== '') {
+      try {
+        reply = await this.callOpenAILLM({ message, detectedLang, memoryContext, history });
+      } catch (err) {
+        console.warn('[AI Service] OpenAI call failed, falling back to built-in engine:', err.message);
+        reply = await this.generateBuiltinResponse({ message, detectedLang, memoryContext, history });
+      }
+    } else if (aiProvider === 'gemini' && geminiKey && geminiKey.trim() !== '') {
       try {
         reply = await this.callGeminiLLM({ message, detectedLang, memoryContext, history });
       } catch (err) {
-        console.warn('Gemini LLM call failed, falling back to built-in concierge engine:', err.message);
+        console.warn('[AI Service] Gemini call failed, falling back to built-in engine:', err.message);
         reply = await this.generateBuiltinResponse({ message, detectedLang, memoryContext, history });
       }
     } else if (openaiKey && openaiKey.trim() !== '') {
       try {
         reply = await this.callOpenAILLM({ message, detectedLang, memoryContext, history });
       } catch (err) {
-        console.warn('OpenAI LLM call failed, falling back to built-in concierge engine:', err.message);
+        console.warn('[AI Service] OpenAI fallback call failed:', err.message);
         reply = await this.generateBuiltinResponse({ message, detectedLang, memoryContext, history });
       }
     } else {
@@ -151,8 +159,8 @@ class AIConciergeService {
     const isExplicitFamily = /family|familia|wife|esposa|fatima|son|hijo|zayd|child|niño|kids|todos|all of us/i.test(lower);
     const isExplicitSolo = /just me|solo yo|only me|for myself|solo para mi|viajo solo|solo travel/i.test(lower);
 
-    // 1. Greetings
-    if (/^(hi|hello|hey|hola|buenos|buenas|que tal|qué tal)/i.test(lower.trim())) {
+    // 1. Standalone Greetings only (e.g. "hi", "hello", "hola")
+    if (/^(hi|hello|hey|hola|buenos d[ií]as|buenas tardes|que tal|qu[eé] tal)[\s!.,?]*$/i.test(lower.trim())) {
       if (isSpanish) {
         return `¡Hola Ahmed! Soy tu Asistente Personal de Viajes (AI Travel Concierge).\n\nTengo registradas las preferencias de tu familia (*${primary.fullName}*, *Fatima Zainul* y *Zayd Zainul*):\n• Aerolíneas: Iberia (Oro) y Aeroméxico (Titanium)\n• Asientos: Ventana con espacio extra y asientos contiguos para la familia\n• Hoteles: 4-5 Estrellas en distritos céntricos (ej. Salamanca)\n• Comidas: Halal / Vegetariana\n\n¿Para quién deseas planificar el viaje hoy? Por ejemplo:\n1️⃣ *"Búscame vuelos y hotel a Madrid para toda mi familia"* (3 pasajeros)\n2️⃣ *"Búscame vuelos de Monterrey a Madrid para mí solo"*`;
       } else {
