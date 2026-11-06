@@ -9,33 +9,24 @@ class GmailService {
     this.clientSecret = process.env.GOOGLE_CLIENT_SECRET || '';
     this.redirectUri = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/api/automation/oauth2callback';
 
-    // 3 Connected Google Accounts as required by client scope
+    // Connected Google Accounts configured for Jorge Gonzalez (MWKS / Personal)
     this.accounts = [
       {
         id: 'acc_01',
-        email: 'ahmed.zainul@example.com',
-        label: 'Primary Personal Account',
-        owner: 'Ahmed Zainul',
+        email: 'jorge@mwks.com.mx',
+        label: 'Business Gmail (MWKS Executive)',
+        owner: 'Jorge Gonzalez',
         status: 'Connected (OAuth 2.0)',
-        color: '#3B82F6',
+        color: '#2563EB',
         isDefault: true
       },
       {
         id: 'acc_02',
-        email: 'ahmed.executive@familyoffice.com',
-        label: 'Family Office & Executive',
-        owner: 'Ahmed Zainul (Office)',
+        email: 'jgonzalez8899@gmail.com',
+        label: 'Personal Gmail & Travel Channel',
+        owner: 'Jorge Gonzalez (Personal)',
         status: 'Connected (OAuth 2.0)',
         color: '#10B981',
-        isDefault: false
-      },
-      {
-        id: 'acc_03',
-        email: 'travel.concierge@zainulgroup.com',
-        label: 'Travel & Logistics Channel',
-        owner: 'Aura Travel Desk',
-        status: 'Connected (OAuth 2.0)',
-        color: '#8B5CF6',
         isDefault: false
       }
     ];
