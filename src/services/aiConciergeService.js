@@ -162,9 +162,9 @@ class AIConciergeService {
     // 1. Standalone Greetings only (e.g. "hi", "hello", "hola")
     if (/^(hi|hello|hey|hola|buenos d[ií]as|buenas tardes|que tal|qu[eé] tal)[\s!.,?]*$/i.test(lower.trim())) {
       if (isSpanish) {
-        return `¡Hola Ahmed! Soy tu Asistente Personal de Viajes (AI Travel Concierge).\n\nTengo registradas las preferencias de tu familia (*${primary.fullName}*, *Fatima Zainul* y *Zayd Zainul*):\n• Aerolíneas: Iberia (Oro) y Aeroméxico (Titanium)\n• Asientos: Ventana con espacio extra y asientos contiguos para la familia\n• Hoteles: 4-5 Estrellas en distritos céntricos (ej. Salamanca)\n• Comidas: Halal / Vegetariana\n\n¿Para quién deseas planificar el viaje hoy? Por ejemplo:\n1️⃣ *"Búscame vuelos y hotel a Madrid para toda mi familia"* (3 pasajeros)\n2️⃣ *"Búscame vuelos de Monterrey a Madrid para mí solo"*`;
+        return `¡Hola! Soy tu Asistente Ejecutivo Personal de Viajes (AI Travel Concierge).\n\nTengo registradas tus preferencias aprobadas:\n• Aerolíneas: Iberia (Oro) y Aeroméxico (Titanium)\n• Asientos: Ventana con espacio extra para piernas\n• Hoteles: 4-5 Estrellas en distritos céntricos (ej. Salamanca)\n• Comidas: Opciones ejecutivas y familiares\n\n¿Viajas solo o con tu familia? Por ejemplo:\n1️⃣ *"Búscame vuelos y hotel en Madrid para mi familia"*\n2️⃣ *"Búscame vuelos a Madrid para mí solo (Solo travel)"*`;
       } else {
-        return `Hello Ahmed! I'm your Personal AI Travel Concierge.\n\nI have active travel profiles for your family (*${primary.fullName}*, *Fatima Zainul*, and *Zayd Zainul*):\n• Preferred Airlines: Iberia (Gold) & Aeroméxico (Titanium)\n• Seating: Window extra legroom & adjacent family seating\n• Hotels: 4-5 Star Luxury in central areas (e.g. Salamanca)\n• Meals: Halal & Child options\n\nWho will be traveling? For example:\n1️⃣ *"Find flights and a hotel in Madrid for my whole family"* (3 passengers)\n2️⃣ *"Find flights from Monterrey to Madrid for just me"* (Solo travel)`;
+        return `Hello! I'm your Personal AI Executive Travel Concierge.\n\nI have your approved travel preferences on file:\n• Preferred Airlines: Iberia (Gold) & Aeroméxico (Titanium)\n• Seating: Window extra legroom (Comfort / Exit row)\n• Hotels: 4-5 Star Luxury in central areas (e.g. Salamanca)\n• Meals: Executive & Family meal preferences\n\nAre you traveling solo or with your family? For example:\n1️⃣ *"Find flights and a hotel in Madrid for my family"*\n2️⃣ *"Find flights to Madrid for just me (Solo travel)"*`;
       }
     }
 
@@ -288,10 +288,10 @@ class AIConciergeService {
       if (isSpanish) {
         return `📋 *Solicitud Formal de Aprobación de Reserva [Orden: TRV-984201]*\n\n` +
           `Para garantizar tu seguridad y evitar compras no autorizadas, por favor revisa el resumen final antes de proceder con el cargo:\n\n` +
-          `👨‍👩‍👦 *Pasajeros:* Familia Zainul (Ahmed [Adulto], Fatima [Adulto], Zayd [Niño 8 años])\n` +
+          `👨‍👩‍👦 *Pasajeros:* Grupo Familiar (2 Adultos + 1 Niño)\n` +
           `✈️ *Vuelo Iberia:* Monterrey (MTY) ➔ Madrid (MAD) | Premium Economy ($3,280 USD)\n` +
-          `   • Asientos: Fila contigua 12A (Ventana), 12B (Zayd), 12C (Pasillo)\n` +
-          `   • Comidas: Halal (MOML) + Kit infantil (CHML)\n` +
+          `   • Asientos: Fila contigua 12A (Ventana), 12B (Centro), 12C (Pasillo)\n` +
+          `   • Comidas: Menú Ejecutivo + Kit infantil\n` +
           `🏨 *Hotel Wellington & Spa Madrid:* 4 Noches Salamanca ($2,180 USD)\n` +
           `   • Suite Familiar conectada con desayuno gourmet incluido\n\n` +
           `💰 *Total a Autorizar:* **$5,460 USD** (Tarifa garantizada sin cargos ocultos)\n` +
@@ -301,10 +301,10 @@ class AIConciergeService {
       } else {
         return `📋 *Formal Booking Authorization Request [Order: TRV-984201]*\n\n` +
           `Under our strict executive safety protocol, no charge or booking occurs without your explicit confirmation. Please review your final travel summary:\n\n` +
-          `👨‍👩‍👦 *Travel Party:* Zainul Family (Ahmed [Adult], Fatima [Adult], Zayd [Child 8 yrs])\n` +
+          `👨‍👩‍👦 *Travel Party:* Family Group (2 Adults + 1 Child)\n` +
           `✈️ *Flight (Iberia):* Monterrey (MTY) ➔ Madrid (MAD) | Premium Economy ($3,280 USD)\n` +
-          `   • Seating: Row block 12A (Window), 12B (Zayd), 12C (Aisle)\n` +
-          `   • Meals: 2x Halal (MOML) + 1x Child meal kit (CHML)\n` +
+          `   • Seating: Row block 12A (Window), 12B (Middle), 12C (Aisle)\n` +
+          `   • Meals: Executive Meal + Child meal kit\n` +
           `🏨 *Hotel Wellington & Spa Madrid:* 4 Nights Salamanca ($2,180 USD)\n` +
           `   • Connected Family Suite with gourmet buffet breakfast included\n\n` +
           `💰 *Total Amount to Authorize:* **$5,460 USD** (Price locked guarantee)\n` +
@@ -418,12 +418,12 @@ class AIConciergeService {
       if (isExplicitFamily || (!isExplicitSolo && /family|hijo|esposa/i.test(lower))) {
         if (isSpanish) {
           return `👨‍👩‍👦 *Propuesta de Viaje Familiar: Monterrey (MTY) ➔ Madrid (MAD)*\n` +
-            `📍 *Grupo:* Familia Zainul (3 Pasajeros: Ahmed [Adulto], Fatima [Adulto], Zayd [Niño 8 años])\n` +
-            `🎯 *Preferencias Aplicadas:* Asientos contiguos (Ventana + Centro + Pasillo), Comida Halal/Infantil, Millas Iberia Oro.\n\n` +
+            `📍 *Grupo:* Grupo Familiar (3 Pasajeros: 2 Adultos + 1 Niño)\n` +
+            `🎯 *Preferencias Aplicadas:* Asientos contiguos (Ventana + Centro + Pasillo), Menú Ejecutivo/Infantil, Millas Iberia Oro.\n\n` +
             `✈️ *Top 3 Opciones de Vuelos (Total Grupo Familiar):*\n` +
             `1️⃣ *Iberia (Recomendada Familiar)* — MTY ➔ MAD (Escala rápida en MEX)\n` +
             `   • Salida: 10:30 AM | Asientos fila completa asignados (12A, 12B, 12C)\n` +
-            `   • Menús: 2x MOML (Halal) + 1x CHML (Infantil con kit de juegos)\n` +
+            `   • Menús: Menú Ejecutivo + Kit infantil con entretenimiento\n` +
             `   • Precio Total: $3,280 USD (2 Adultos + 1 Niño con tarifa con descuento)\n\n` +
             `2️⃣ *Aeroméxico* — MTY ➔ MAD (Vía CDMX T2)\n` +
             `   • Salida: 12:15 PM | Cabina AM Plus con prioridad de abordaje para familias\n` +
@@ -433,10 +433,10 @@ class AIConciergeService {
             `   • Precio Total: $3,100 USD\n\n` +
             `🏨 *Top 3 Hoteles Familiares en Madrid (Salamanca, 4 noches):*\n` +
             `1️⃣ *Hotel Wellington & Spa Madrid (5 Estrellas)* — C. de Velázquez\n` +
-            `   • *Suite Familiar conectada:* 1 Cama King + 1 Cama extra para Zayd, desayuno buffet gourmet incluido para los 3.\n` +
+            `   • *Suite Familiar conectada:* 1 Cama King + 1 Cama extra, desayuno buffet gourmet incluido.\n` +
             `   • Total Estancia: $2,180 USD (4 noches)\n\n` +
             `2️⃣ *BLESS Hotel Madrid (5 Estrellas Lujo)* — Barrio de Salamanca\n` +
-            `   • Dos habitaciones comunicadas de lujo, piscina y amenidades infantiles.\n` +
+            `   • Dos habitaciones comunicadas de lujo, piscina y amenidades familiares.\n` +
             `   • Total Estancia: $2,540 USD (4 noches)\n\n` +
             `3️⃣ *H10 Villa de la Reina (Boutique 4 Estrellas)*\n` +
             `   • Habitación Triple Deluxe, céntrica, desayuno artesanal incluido.\n` +
@@ -445,12 +445,12 @@ class AIConciergeService {
             `*¿Qué opción de vuelo y hotel prefieres para tu familia?*`;
         } else {
           return `👨‍👩‍👦 *Family Travel Curation: Monterrey (MTY) ➔ Madrid (MAD)*\n` +
-            `📍 *Travel Party:* Zainul Family (3 Passengers: Ahmed [Adult], Fatima [Adult], Zayd [Child 8 yrs])\n` +
-            `🎯 *Preferences Enforced:* Row seating (Window + Middle + Aisle), Halal/Child meals, Iberia Plus Gold accrual.\n\n` +
+            `📍 *Travel Party:* Family Group (3 Passengers: 2 Adults + 1 Child)\n` +
+            `🎯 *Preferences Enforced:* Row seating (Window + Middle + Aisle), Executive/Child meals, Iberia Plus Gold accrual.\n\n` +
             `✈️ *Top 3 Flight Options (Full Family Total):*\n` +
             `1️⃣ *Iberia (Top Family Recommendation)* — MTY ➔ MAD (1 seamless layover via MEX)\n` +
-            `   • Departure: 10:30 AM | Row 12 block (12A Window, 12B Middle for Zayd, 12C Aisle)\n` +
-            `   • Catering: 2x MOML (Halal Adult) + 1x CHML (Child entertainment meal pack)\n` +
+            `   • Departure: 10:30 AM | Row 12 block (12A Window, 12B Middle, 12C Aisle)\n` +
+            `   • Catering: Executive Adult Meals + Child entertainment meal pack\n` +
             `   • Total Fare: $3,280 USD (2 Adults + 1 Child discounted fare)\n\n` +
             `2️⃣ *Aeroméxico* — MTY ➔ MAD (Via MEX Terminal 2)\n` +
             `   • Departure: 12:15 PM | AM Plus Cabin with family priority boarding\n` +
@@ -460,10 +460,10 @@ class AIConciergeService {
             `   • Total Fare: $3,100 USD\n\n` +
             `🏨 *Top 3 Family Accommodations in Salamanca, Madrid (4 Nights):*\n` +
             `1️⃣ *Hotel Wellington & Spa Madrid (5-Star Luxury)* — Velázquez St, Salamanca\n` +
-            `   • *Connected Family Suite:* 1 King Bed + 1 Rollaway bed for Zayd, gourmet buffet breakfast included for all 3 guests.\n` +
+            `   • *Connected Family Suite:* 1 King Bed + 1 Rollaway bed, gourmet buffet breakfast included.\n` +
             `   • Total Stay: $2,180 USD (4 nights)\n\n` +
             `2️⃣ *BLESS Hotel Madrid (5-Star Luxury Boutique)* — Salamanca\n` +
-            `   • Connecting Deluxe rooms with rooftop pool access and welcome kids gift.\n` +
+            `   • Connecting Deluxe rooms with rooftop pool access and welcome gift.\n` +
             `   • Total Stay: $2,540 USD (4 nights)\n\n` +
             `3️⃣ *H10 Villa de la Reina (4-Star Superior Boutique)*\n` +
             `   • Triple Deluxe Family Room, central historic location, breakfast included.\n` +
@@ -476,7 +476,7 @@ class AIConciergeService {
       // SCENARIO B: Solo Travel (or general request with clarity on travel party)
       if (isSpanish) {
         return `🛫 *Búsqueda de Viaje: Monterrey (MTY) ➔ Madrid (MAD)*\n\n` +
-          `ℹ️ *Nota del Asistente:* He preparado las opciones para *1 Pasajero (Ahmed)*. Si viaja también Fatima o Zayd, solo dímelo y recalculo para el grupo familiar.\n\n` +
+          `ℹ️ *Nota del Asistente:* He preparado las opciones para *Viaje Solo (1 Pasajero)*. Si viajas con tu familia, solo dímelo y recalculo para el grupo familiar.\n\n` +
           `✈️ *Top 3 Opciones de Vuelos (Individual - Asiento Ventana con Espacio Extra):*\n` +
           `1️⃣ *Iberia (Recomendada)* — MTY ➔ MAD | Premium Economy ($1,240 USD)\n` +
           `2️⃣ *Aeroméxico* — MTY ➔ MAD | AM Plus ($1,310 USD)\n` +
@@ -485,10 +485,10 @@ class AIConciergeService {
           `1️⃣ *Hotel Wellington & Spa (5 Estrellas)* — $1,420 USD total\n` +
           `2️⃣ *Bless Hotel Madrid (5 Estrellas)* — $1,680 USD total\n` +
           `3️⃣ *H10 Villa de la Reina (4 Estrellas)* — $980 USD total\n\n` +
-          `¿Deseas confirmar este viaje solo para ti, o viaja también la familia (*Fatima y Zayd*)?`;
+          `¿Deseas confirmar este viaje solo para ti, o viajas con tu familia?`;
       } else {
         return `🛫 *Travel Curation: Monterrey (MTY) ➔ Madrid (MAD)*\n\n` +
-          `ℹ️ *Concierge Note:* Presenting options for *Solo Traveler (Ahmed)*. If Fatima or Zayd are joining, let me know and I will immediately quote for the full family party.\n\n` +
+          `ℹ️ *Concierge Note:* Presenting options for *Solo Travel (1 Passenger)*. If traveling with your family, let me know and I will immediately quote for the family party.\n\n` +
           `✈️ *Top 3 Flight Options (Solo - Window & Extra Legroom):*\n` +
           `1️⃣ *Iberia (Top Match)* — MTY ➔ MAD | Premium Economy ($1,240 USD)\n` +
           `2️⃣ *Aeroméxico* — MTY ➔ MAD | AM Plus ($1,310 USD)\n` +
@@ -497,30 +497,30 @@ class AIConciergeService {
           `1️⃣ *Hotel Wellington & Spa (5-Star)* — $1,420 USD total\n` +
           `2️⃣ *BLESS Hotel Madrid (5-Star)* — $1,680 USD total\n` +
           `3️⃣ *H10 Villa de la Reina (4-Star)* — $980 USD total\n\n` +
-          `Would you like to proceed with Solo travel, or is your family (*Fatima & Zayd*) traveling with you?`;
+          `Would you like to proceed with Solo travel, or are you traveling with your family?`;
       }
     }
 
     // Default conversational response
     if (isSpanish) {
-      return `Entendido, Ahmed. He registrado tu solicitud: *"${message}"*.\n\nPuedo organizar vuelos y hoteles tanto para ti individualmente como para todo tu grupo familiar (Fatima y Zayd), además de escanear tus 3 cuentas de Gmail y gestionar tu Google Calendar. ¿Cómo te gustaría proceder?`;
+      return `Entendido. He registrado tu solicitud: *"${message}"*.\n\nPuedo organizar vuelos y hoteles tanto para ti individualmente (Solo Travel) como para tu grupo familiar, además de gestionar tu Google Calendar y cuentas de Gmail. ¿Cómo te gustaría proceder?`;
     } else {
-      return `Understood, Ahmed. I have noted your request: *"${message}"*.\n\nI can coordinate flights, hotels, and itineraries for you individually or for your entire family party (Fatima & Zayd), as well as scan your 3 Gmail accounts and manage your Google Calendars. How would you like to proceed?`;
+      return `Understood. I have noted your request: *"${message}"*.\n\nI can coordinate flights, hotels, and itineraries for you individually (Solo Travel) or for your family group, as well as manage your Google Calendars and Gmail accounts. Would you like to proceed with Solo travel or with your family?`;
     }
   }
 
   buildSystemPrompt(language, memoryContext) {
     return `
-You are the personal AI Travel Concierge for Ahmed Zainul and his family.
+You are the personal AI Executive & Travel Concierge.
 Language: Respond in ${language === 'es' ? 'Spanish' : 'English'} (matching the user's natural language).
 Tone: Highly professional, proactive, attentive, executive, courteous.
 
 CRITICAL RULES:
-1. Always account for multi-traveler family setups (Ahmed, Fatima, Zayd). Clarify or calculate family totals when family members are mentioned.
+1. Distinguish between Solo travel and Family travel. If not specified, ask whether the user is traveling solo or with family. Do not assume or hardcode personal family member names.
 2. Always present the TOP 3 curated flight and hotel options.
-3. Personal Automation: You have access to 3 connected Google accounts (Personal, Executive, Travel Desk) and linked Google Calendars for itinerary scheduling and conflict detection.
+3. Personal Automation: You have access to connected Google accounts and linked Google Calendars for itinerary scheduling and conflict detection.
 4. TRANSACTIONS & APPROVALS: You can prepare travel drafts and quote pricing, but you must NEVER complete a booking or charge a payment without EXPLICIT user authorization.
-5. CARD SECURITY (PCI-DSS): NEVER store, request, or output raw 16-digit credit card numbers. Only refer to tokenized payment vaults (Elevate Business / Revolut Family •••• 9842).
+5. CARD SECURITY (PCI-DSS): NEVER store, request, or output raw 16-digit credit card numbers. Only refer to tokenized payment vaults (Elevate Business / Revolut •••• 9842).
 
 ${memoryContext}
     `.trim();

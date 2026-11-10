@@ -1,24 +1,24 @@
 {
   "lastUpdated": "2026-09-25T15:56:00Z",
   "travelGroup": {
-    "familyGroupName": "Zainul Family",
+    "familyGroupName": "Executive Travel Group",
     "primaryContactPhone": "+52 81 1234 5678",
-    "primaryEmail": "ahmed.zainul@example.com"
+    "primaryEmail": "jorge@mwks.com.mx"
   },
   "travelers": [
     {
       "id": "trav_001",
       "isPrimary": true,
-      "fullName": "Ahmed Zainul",
-      "preferredName": "Ahmed",
-      "relationship": "Self (Primary Traveler)",
+      "fullName": "Primary Executive (Self)",
+      "preferredName": "Executive",
+      "relationship": "Primary Traveler (Self)",
       "type": "Adult",
       "dateOfBirth": "1988-06-14",
-      "homeAirports": ["MTY (Monterrey, Mexico)", "DFW (Dallas, USA)"],
+      "homeAirports": ["MTY (Monterrey, Mexico)", "MEX (Mexico City)", "DFW (Dallas, USA)"],
       "frequentDestinations": ["Madrid, Spain", "Salamanca, Spain", "New York, USA"],
       "seatPreference": "Window, Extra Legroom (Comfort / Exit Row)",
       "cabinPreference": "Business / Premium Economy",
-      "mealPreference": "Halal / Muslim Meal (MOML)",
+      "mealPreference": "Standard / Executive Meal",
       "preferredAirlines": ["Iberia", "Aeroméxico", "Delta Air Lines", "Qatar Airways"],
       "loyaltyPrograms": [
         { "airline": "Iberia Plus", "memberNumber": "IB-9482019", "tier": "Gold / Oro" },
@@ -34,14 +34,14 @@
     {
       "id": "trav_002",
       "isPrimary": false,
-      "fullName": "Fatima Zainul",
-      "preferredName": "Fatima",
+      "fullName": "Spouse / Companion",
+      "preferredName": "Companion",
       "relationship": "Spouse",
       "type": "Adult",
       "dateOfBirth": "1991-09-22",
-      "seatPreference": "Window or Aisle (Seated directly adjacent to Ahmed)",
-      "cabinPreference": "Same as Ahmed (Business / Premium Economy)",
-      "mealPreference": "Halal Vegetarian (AVML / MOML)",
+      "seatPreference": "Window or Aisle (Seated directly adjacent)",
+      "cabinPreference": "Same as Primary (Business / Premium Economy)",
+      "mealPreference": "Vegetarian / Standard",
       "loyaltyPrograms": [
         { "airline": "Iberia Plus", "memberNumber": "IB-9482020", "tier": "Silver / Plata" }
       ],
@@ -54,22 +54,21 @@
     {
       "id": "trav_003",
       "isPrimary": false,
-      "fullName": "Zayd Zainul",
-      "preferredName": "Zayd",
-      "relationship": "Child (Son, Age 8)",
+      "fullName": "Family Member (Child)",
+      "preferredName": "Child",
+      "relationship": "Child (Dependent)",
       "type": "Child",
       "dateOfBirth": "2018-03-15",
-      "seatPreference": "Middle seat directly between Ahmed and Fatima",
-      "cabinPreference": "Same as Parents",
-      "mealPreference": "Child Halal Meal (CHML)",
-      "specialAssistance": "Requires child entertainment kit / headphones",
+      "seatPreference": "Middle seat adjacent to primary travelers",
+      "cabinPreference": "Economy / Premium Economy",
+      "mealPreference": "Child Meal",
       "loyaltyPrograms": [
         { "airline": "Iberia Plus Kids", "memberNumber": "IB-9482021", "tier": "Clásica" }
       ],
       "passportEncrypted": {
         "nationality": "Mexican / International",
         "maskedNumber": "••••••••7203",
-        "expiryDate": "2029-08-20"
+        "expiryDate": "2030-05-20"
       }
     }
   ],
