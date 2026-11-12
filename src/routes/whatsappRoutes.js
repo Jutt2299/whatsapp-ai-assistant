@@ -5,11 +5,10 @@ const querystring = require('querystring');
 const aiConciergeService = require('../services/aiConciergeService');
 
 /**
- * Send a WhatsApp message asynchronously via Twilio REST API
- * This ensures the bot never hits Twilio's 15-second webhook timeout limit
+ * Send a single WhatsApp message via Twilio REST API
  */
-function sendWhatsAppMessage(to, body) {
-  return new Promise((resolve, reject) => {
+function sendSingleWhatsAppMessage(to, bodyChunk) {
+  return new Promise((resolve) => {
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     const fromNumber = process.env.TWILIO_WHATSAPP_NUMBER || 'whatsapp:+14155238886';
@@ -22,7 +21,7 @@ function sendWhatsAppMessage(to, body) {
     const postData = querystring.stringify({
       From: fromNumber,
       To: to,
-      Body: body
+      Body: bodyChunk
     });
 
     const req = https.request({
@@ -41,7 +40,11 @@ function sendWhatsAppMessage(to, body) {
       res.on('end', () => {
         try {
           const parsed = JSON.parse(data);
-          console.log(`[Twilio Outbound Success] Delivered to ${to}: SID ${parsed.sid}`);
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            console.log(`[Twilio Outbound Success] Delivered to ${to}: SID ${parsed.sid}`);
+          } else {
+            console.error(`[Twilio Outbound Error ${parsed.code}] ${parsed.message}`);
+          }
           resolve(parsed);
         } catch (e) {
           resolve(data);
@@ -50,13 +53,60 @@ function sendWhatsAppMessage(to, body) {
     });
 
     req.on('error', (err) => {
-      console.error('[Twilio Outbound Error]', err);
-      reject(err);
+      console.error('[Twilio Outbound Network Error]', err);
+      resolve(null);
     });
 
     req.write(postData);
     req.end();
   });
+}
+
+/**
+ * Send a WhatsApp message asynchronously via Twilio REST API
+ * Automatically splits messages exceeding WhatsApp's 1600 character limit (Twilio Error 21617)
+ */
+async function sendWhatsAppMessage(to, body) {
+  if (!body) return;
+
+  const MAX_CHUNK_SIZE = 1500;
+  if (body.length <= MAX_CHUNK_SIZE) {
+    return await sendSingleWhatsAppMessage(to, body);
+  }
+
+  // Split into paragraphs / smart chunks
+  const chunks = [];
+  let remaining = body;
+
+  while (remaining.length > 0) {
+    if (remaining.length <= MAX_CHUNK_SIZE) {
+      chunks.push(remaining);
+      break;
+    }
+
+    // Try finding the last newline before MAX_CHUNK_SIZE
+    let splitIdx = remaining.lastIndexOf('\n', MAX_CHUNK_SIZE);
+    if (splitIdx === -1 || splitIdx < 800) {
+      // Try finding the last period / sentence end
+      splitIdx = remaining.lastIndexOf('. ', MAX_CHUNK_SIZE);
+      if (splitIdx !== -1) splitIdx += 1;
+    }
+    if (splitIdx === -1 || splitIdx < 500) {
+      splitIdx = MAX_CHUNK_SIZE;
+    }
+
+    chunks.push(remaining.substring(0, splitIdx).trim());
+    remaining = remaining.substring(splitIdx).trim();
+  }
+
+  console.log(`[Twilio Chunking] Splitting message of ${body.length} chars into ${chunks.length} parts for ${to}`);
+  for (let i = 0; i < chunks.length; i++) {
+    await sendSingleWhatsAppMessage(to, chunks[i]);
+    // Small pause between chunks so they arrive in exact order
+    if (i < chunks.length - 1) {
+      await new Promise(r => setTimeout(r, 600));
+    }
+  }
 }
 
 /**
