@@ -162,9 +162,9 @@ class AIConciergeService {
     // 1. Standalone Greetings only (e.g. "hi", "hello", "hola")
     if (/^(hi|hello|hey|hola|buenos d[ií]as|buenas tardes|que tal|qu[eé] tal)[\s!.,?]*$/i.test(lower.trim())) {
       if (isSpanish) {
-        return `¡Hola! Soy tu Asistente Ejecutivo Personal de Viajes (AI Travel Concierge).\n\nTengo registradas tus preferencias aprobadas:\n• Aerolíneas: Iberia (Oro) y Aeroméxico (Titanium)\n• Asientos: Ventana con espacio extra para piernas\n• Hoteles: 4-5 Estrellas en distritos céntricos (ej. Salamanca)\n• Comidas: Opciones ejecutivas y familiares\n\n¿Viajas solo o con tu familia? Por ejemplo:\n1️⃣ *"Búscame vuelos y hotel en Madrid para mi familia"*\n2️⃣ *"Búscame vuelos a Madrid para mí solo (Solo travel)"*`;
+        return `¡Hola! Soy Maya Kohne, tu Asistente Ejecutiva Personal (AI Executive & Travel Concierge).\n\nTengo registradas tus preferencias aprobadas:\n• Aerolíneas: Iberia (Oro) y Aeroméxico (Titanium)\n• Asientos: Ventana con espacio extra para piernas\n• Hoteles: 4-5 Estrellas en distritos céntricos (ej. Salamanca)\n• Comidas: Opciones ejecutivas y familiares\n\n¿Viajas solo o con tu familia? Por ejemplo:\n1️⃣ *"Búscame vuelos y hotel en Madrid para mi familia"*\n2️⃣ *"Búscame vuelos a Madrid para mí solo (Solo travel)"*`;
       } else {
-        return `Hello! I'm your Personal AI Executive Travel Concierge.\n\nI have your approved travel preferences on file:\n• Preferred Airlines: Iberia (Gold) & Aeroméxico (Titanium)\n• Seating: Window extra legroom (Comfort / Exit row)\n• Hotels: 4-5 Star Luxury in central areas (e.g. Salamanca)\n• Meals: Executive & Family meal preferences\n\nAre you traveling solo or with your family? For example:\n1️⃣ *"Find flights and a hotel in Madrid for my family"*\n2️⃣ *"Find flights to Madrid for just me (Solo travel)"*`;
+        return `Hello! I'm Maya Kohne, your Personal AI Executive Assistant & Travel Concierge.\n\nI have your approved travel preferences on file:\n• Preferred Airlines: Iberia (Gold) & Aeroméxico (Titanium)\n• Seating: Window extra legroom (Comfort / Exit row)\n• Hotels: 4-5 Star Luxury in central areas (e.g. Salamanca)\n• Meals: Executive & Family meal preferences\n\nAre you traveling solo or with your family? For example:\n1️⃣ *"Find flights and a hotel in Madrid for my family"*\n2️⃣ *"Find flights to Madrid for just me (Solo travel)"*`;
       }
     }
 
@@ -511,7 +511,7 @@ class AIConciergeService {
 
   buildSystemPrompt(language, memoryContext) {
     return `
-You are the personal AI Executive & Travel Concierge.
+You are Maya Kohne, the personal AI Executive Assistant & Travel Concierge for Jorge Gonzalez.
 Language: Respond in ${language === 'es' ? 'Spanish' : 'English'} (matching the user's natural language).
 Tone: Highly professional, proactive, attentive, executive, courteous.
 
