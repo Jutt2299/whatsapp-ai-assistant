@@ -4,6 +4,7 @@ const gmailService = require('./gmailService');
 const calendarService = require('./calendarService');
 const transactionService = require('./transactionService');
 const leadService = require('./leadService');
+const clickupService = require('./clickupService');
 
 class AIConciergeService {
   constructor() {
@@ -36,7 +37,15 @@ class AIConciergeService {
 
     let reply = '';
 
-    if (aiProvider === 'openai' && openaiKey && openaiKey.trim() !== '') {
+    // Direct ClickUp Task Action Handling
+    const isCreateTask = /(?:crea|crear|agrega|agregar|nueva)\s+(?:una\s+)?tarea|add\s+(?:a\s+)?task|create\s+(?:a\s+)?task/i.test(message);
+    const isQueryTasks = /(?:qu[eé]\s+tareas|mis\s+tareas|listar\s+tareas|ver\s+tareas|show\s+tasks|list\s+tasks|my\s+tasks|tareas.*clickup|clickup.*tareas)/i.test(message) && !isCreateTask;
+
+    if (isCreateTask) {
+      reply = await this.handleClickUpCreateTask(message, detectedLang);
+    } else if (isQueryTasks) {
+      reply = await this.handleClickUpQueryTasks(message, detectedLang);
+    } else if (aiProvider === 'openai' && openaiKey && openaiKey.trim() !== '') {
       try {
         reply = await this.callOpenAILLM({ message, detectedLang, memoryContext, history });
       } catch (err) {
@@ -509,6 +518,78 @@ class AIConciergeService {
     }
   }
 
+  async handleClickUpCreateTask(message, detectedLang) {
+    const isSpanish = detectedLang === 'es';
+    let taskName = message
+      .replace(/^(?:maya|hola|hey|oye)?[\s,:]*(?:por\s+favor\s+)?(?:crea|crear|agrega|agregar|nueva)\s+(?:una\s+)?tarea(?:\s+en\s+clickup)?(?:\s+que\s+se\s+llame|\s+de|\s*:)?/i, '')
+      .replace(/^(?:maya|hi|hey)?[\s,:]*(?:please\s+)?(?:create|add)\s+(?:a\s+)?(?:new\s+)?task(?:\s+in\s+clickup)?(?:\s+called|\s+to|\s*:)?/i, '')
+      .trim();
+
+    if (!taskName || taskName.length < 2) {
+      taskName = isSpanish ? 'Revisión y seguimiento ejecutivo' : 'Executive Review & Follow-up';
+    }
+
+    const res = await clickupService.createTask({
+      name: taskName,
+      description: `Task created via WhatsApp by Jorge Gonzalez\nProcessed by Maya Kohne (Executive Assistant)\nTimestamp: ${new Date().toISOString()}`
+    });
+
+    if (res.success && res.task) {
+      if (isSpanish) {
+        return `✅ *Tarea Creada Exitosamente en ClickUp*\n\n` +
+          `📌 *Título:* ${res.task.name}\n` +
+          `📁 *Workspace / Lista:* MWKS (${res.task.list})\n` +
+          `🏷️ *Estado Inicial:* ${res.task.status}\n` +
+          `🔗 *Enlace:* ${res.task.url}\n\n` +
+          `_La tarea ya está registrada en tiempo real en tu cuenta de ClickUp._`;
+      } else {
+        return `✅ *Task Successfully Created in ClickUp*\n\n` +
+          `📌 *Title:* ${res.task.name}\n` +
+          `📁 *Workspace / List:* MWKS (${res.task.list})\n` +
+          `🏷️ *Initial Status:* ${res.task.status}\n` +
+          `🔗 *Link:* ${res.task.url}\n\n` +
+          `_The task is now live and synchronized to your MWKS ClickUp workspace._`;
+      }
+    } else {
+      if (isSpanish) {
+        return `⚠️ No pude crear la tarea directamente en ClickUp en este momento (${res.error || 'error de conexión'}).`;
+      } else {
+        return `⚠️ Could not create the task in ClickUp at this moment (${res.error || 'connection error'}).`;
+      }
+    }
+  }
+
+  async handleClickUpQueryTasks(message, detectedLang) {
+    const isSpanish = detectedLang === 'es';
+    const tasks = await clickupService.getRecentTasks(null, 5);
+
+    if (!tasks || tasks.length === 0) {
+      if (isSpanish) {
+        return `📋 *Tareas en ClickUp (Workspace MWKS)*\n\nNo tienes tareas pendientes activas en este momento en tu lista principal.`;
+      } else {
+        return `📋 *ClickUp Tasks (MWKS Workspace)*\n\nNo active pending tasks found at this moment in your primary list.`;
+      }
+    }
+
+    if (isSpanish) {
+      let text = `📋 *Tareas Activas en ClickUp (Workspace MWKS):*\n\n`;
+      tasks.forEach((t, i) => {
+        text += `${i + 1}️⃣ *${t.name}*\n`;
+        text += `   • Estado: ${t.status} | Prioridad: ${t.priority}\n`;
+        text += `   • Enlace: ${t.url}\n\n`;
+      });
+      return text.trim();
+    } else {
+      let text = `📋 *Active Tasks in ClickUp (MWKS Workspace):*\n\n`;
+      tasks.forEach((t, i) => {
+        text += `${i + 1}️⃣ *${t.name}*\n`;
+        text += `   • Status: ${t.status} | Priority: ${t.priority}\n`;
+        text += `   • Link: ${t.url}\n\n`;
+      });
+      return text.trim();
+    }
+  }
+
   buildSystemPrompt(language, memoryContext) {
     return `
 You are Maya Kohne, the personal AI Executive Assistant & Travel Concierge for Jorge Gonzalez.
@@ -520,8 +601,8 @@ CRITICAL RULES:
 2. Always present the TOP 3 curated flight and hotel options. Real-time airline flight searches and hotel availability are powered via the connected Duffel Travel API engine.
 3. NO HALLUCINATION / STRICT FACTUAL HONESTY: NEVER invent, fabricate, or hallucinate internal company records, meetings, suppliers, or business tasks. If an executive weekly report or task list is requested and no live database is connected, state clearly that no active records are found or that live CRM/ERP integration is pending connection. Never present fictional or placeholder data as verified business data.
 4. INTEGRATION & CAPABILITY BOUNDARIES:
+   - ClickUp & Task Management: FULLY CONNECTED & OPERATIONAL to Jorge Gonzalez's MWKS Workspace (Team ID: 90141014030). You can create, organize, and query live tasks in ClickUp.
    - Google Calendar: You can draft schedules and plan itineraries. Direct automatic sync/writing to personal calendars requires completing the 1-click Google OAuth setup.
-   - ClickUp & Task Management: You can draft, structure, and prioritize action items and workflows. Direct task creation in ClickUp requires the ClickUp API token integration.
    - WhatsApp & Email: You can draft, edit, and optimize emails and messages. Direct outbound sending to third-party recipients requires explicit OAuth/SMTP configuration.
    - Banking & Payments (Revolut / Elevate): You can review invoice figures, calculate amounts, and prepare draft payout summaries. You NEVER execute real-world money transfers or wire transactions directly.
 5. CARD SECURITY (PCI-DSS): NEVER store, request, or output raw 16-digit credit card numbers. Only refer to tokenized payment vaults (Elevate Business / Revolut •••• 9842).
